@@ -1,0 +1,51 @@
+/* Shared UI components. All values come from the tokens in index.css. */
+
+/* ---------- Typography ---------- */
+.ui-title {
+  font-family: var(--font);
+  font-size: var(--title-size);
+  line-height: var(--title-line);
+  font-weight: var(--title-weight);
+  color: var(--title-color);
+}
+
+.ui-subtitle {
+  font-family: var(--font);
+  font-size: var(--subtitle-size);
+  line-height: var(--subtitle-line);
+  font-weight: var(--subtitle-weight);
+  color: var(--subtitle-color);
+}
+
+/* Figma: League Spartan 500 20px, #391713 */
+.ui-section-title {
+  font-family: var(--section-font);
+  font-size: var(--section-size);
+  line-height: var(--section-line);
+  font-weight: var(--section-weight);
+  color: var(--section-color);
+}
+
+/* ---------- Button ---------- */
+.ui-btn {
+  font-family: var(--font);
+  font-size: var(--button-size);
+  line-height: var(--button-line);
+  font-weight: var(--button-weight);
+  letter-spacing: var(--button-letter-spacing);
+  border-radius: var(--button-radius);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+.ui-btn:active:not(:disabled) { transform: scale(0.98); }
+.ui-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.ui-btn--lg { width: 100%; height: var(--button-height); }
+.ui-btn--sm { height: 40px; padding: 0 22px; font-size: 14px; }
+
+.ui-btn--primary { background: var(--orange); color: #fff; }
+.ui-btn--primary:hover:not(:disabled) { background: var(--orange-dark); }
+
+.ui-btn--outline { background: #fff; color: var(--orange); border-color: var(--orange); }
+.ui-btn--outline:hover:not(:disabled) { background: var(--orange-soft); }

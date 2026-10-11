@@ -1,0 +1,543 @@
+/* ---------- Layout ---------- */
+/* On phones the app fills the screen; on wider screens it renders as the 375x812 Figma frame. */
+.app-shell {
+  width: 100%;
+  max-width: var(--frame-width);
+  min-height: 100dvh;
+  margin: 0 auto;
+  background: var(--bg);
+  position: relative;
+}
+
+@media (min-width: 500px) {
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 24px 0;
+  }
+  .app-shell {
+    height: var(--frame-height);
+    min-height: 0;
+    overflow-y: auto;
+    border-radius: 24px;
+    box-shadow: 0 12px 48px rgba(30, 35, 44, 0.12);
+  }
+  #root { width: 100%; }
+  .app-shell .screen { min-height: 100%; }
+}
+
+.screen {
+  min-height: 100dvh;
+  padding: 24px 20px 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+.muted { color: var(--muted); }
+.small { font-size: 12px; }
+.accent { color: var(--orange); }
+.text-dark { color: var(--text); }
+.row-between { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.ellipsis { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+
+.back-btn {
+  width: 40px;
+  height: 40px;
+  margin-left: -8px;
+  border: none;
+  background: none;
+  color: var(--icon-orange);
+  display: grid;
+  place-items: center;
+}
+
+.link-btn {
+  border: none;
+  background: none;
+  padding: 0;
+  color: var(--orange);
+  font-weight: 600;
+  font-size: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 2px;
+}
+
+/* ---------- Auth screens ---------- */
+.auth-title { margin-top: 20px; }
+.auth-subtitle { margin-top: 8px; max-width: 327px; }
+
+.phone-field {
+  margin-top: 22px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 19px;
+  padding: 0 19px; /* 20px in Figma minus the 1px border */
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--field);
+}
+.phone-field.has-error { border-color: var(--error); }
+.dial-code { font-size: 16px; line-height: 12px; font-weight: 700; color: var(--title-color); }
+.phone-field input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: none;
+  outline: none;
+  font-size: 16px;
+  letter-spacing: 1px;
+  caret-color: var(--orange);
+}
+.phone-field input::placeholder { color: #a3a8b0; }
+
+.error-text { color: var(--error); font-size: 13px; margin-top: 8px; }
+.hint { margin-top: 6px; font-size: 13px; color: var(--muted); }
+
+.auth-footer { margin-top: auto; padding-top: 32px; }
+.terms { text-align: center; color: var(--muted); font-size: 10px; line-height: 150%; font-weight: 400; margin-top: 12px; }
+.terms b { color: var(--text); font-weight: 500; }
+
+/* Figma: 287.5 x 48 row, 14px gap between the 6 boxes and the dash. */
+.otp-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 287.5px;
+  max-width: 100%;
+  height: 48px;
+  margin-top: 32px;
+}
+.otp-dash { color: var(--muted); font-size: 14px; }
+.otp-box {
+  flex: 1;
+  min-width: 0;
+  height: 48px;
+  padding: 0;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--field);
+  caret-color: var(--orange);
+}
+.otp-box:focus { outline: none; border-color: var(--orange); background: #fff; }
+.otp-box.filled { border-color: var(--orange); background: #fff; }
+.otp-box.has-error { border-color: var(--error); }
+.resend { margin-top: 18px; font-size: 14px; line-height: 15px; font-weight: 500; letter-spacing: -0.02em; color: var(--text); }
+.resend .accent,
+.resend .link-btn { font-weight: 700; letter-spacing: inherit; line-height: inherit; }
+
+/* ---------- Home ---------- */
+/* Figma header frame: 375 x 60, label at top 5, location at top 27, name box flush below. */
+.home-screen { padding-top: 0; }
+/* Figma: Inter 12px, #000000 at 40% opacity, 102 x 15 box */
+.location-label { font-family: "Inter", sans-serif; font-size: 12px; font-weight: 400; line-height: 15px; color: #000; opacity: 0.4; }
+/* Figma: Inter 500 12px #000000, 135 x 15 box, 7px below the label (top 27 - 5 - 15) */
+.location { font-family: "Inter", sans-serif; font-size: 12px; font-weight: 500; line-height: 15px; color: #000; margin-top: 7px; }
+
+/* Header spans the full width with a divider line under it. */
+.home-header {
+  height: 60px;
+  margin: 0 -20px;
+  padding: 5px 20px 0;
+  border-bottom: 1px solid #e2e2e2;
+}
+
+/* Figma: name box 174 x 60, #FAFAFA, only the bottom corners rounded (20px). */
+.user-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.user-card {
+  width: 174px;
+  height: 60px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  background: #fafafa;
+  border-radius: 0 0 20px 20px;
+}
+/* Figma: Inter 500 18px, #000000 at 50% opacity, 12px from the left, vertically centered (19 + 22 + 19 = 60) */
+.user-name { font-family: "Inter", sans-serif; font-size: 18px; font-weight: 500; line-height: 22px; color: #000; opacity: 0.5; min-width: 0; }
+/* Figma: icons start 12px below the name box top (109 - 97), 10px apart. */
+.user-actions { display: flex; gap: 10px; flex-shrink: 0; margin-top: 12px; }
+.icon-btn {
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  display: grid;
+  place-items: center;
+}
+.icon-btn.orange { background: linear-gradient(90deg, #ff986d 0%, #ff6e6a 100%); }
+.icon-btn.blue { background: linear-gradient(135deg, #6ec6f2, #3c6fd9); }
+
+.demo-banner {
+  margin-top: 12px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  color: #9a4a10;
+  background: #fff4e5;
+}
+
+.section-title { font-size: 17px; font-weight: 700; margin: 22px 0 12px; }
+/* Places the Best Seller images at Figma top 185 (222 - 37): 120 + 40 + 15 + 10. */
+.home-section { margin: 40px 0 10px; }
+/* Places the first Popular Items image at Figma top 576 (539 in the app). */
+.home-section--popular { margin: 48px 0 24px; }
+
+/* Figma: 4 images of 71.68 x 108, first at left 29 (screen padding 20 + 9), spread evenly. */
+.best-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 9px;
+}
+.best-item { position: relative; display: block; width: 71.68px; flex-shrink: 0; }
+.best-img {
+  width: 71.68px;
+  height: 108px;
+  border-radius: 20px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.2s;
+}
+.best-item:hover .best-img { transform: translateY(-3px); }
+/* Figma: 38 x 16 tag, 80px from the image top, its right edge 1.32px past the image (64 + 38 - 29 - 71.68). */
+.price-tag {
+  position: absolute;
+  top: 80px;
+  right: -1.32px;
+  width: 38px;
+  height: 16px;
+  display: grid;
+  place-items: center;
+  border-radius: 30px 0 0 30px;
+  background: #e95322;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* ---------- Offer banner ----------
+   Figma (relative to the banner, which starts at left 20):
+   title box 123 x 30 at left 24, top 29; "30% OFF" box 127 x 29 at left 22, 12px lower.
+   Both are centered on x = 85.5. Photo: 212 x 141 at left 153 inside the banner; the banner clips
+   what overflows on the right and below. */
+.banner {
+  position: relative;
+  height: 128px;
+  margin-top: 21px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.banner-track { display: flex; height: 100%; transition: transform 0.5s ease; }
+.banner-slide {
+  position: relative;
+  flex: 0 0 100%;
+  height: 100%;
+  background: #e95322;
+}
+.banner-text {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 171px;
+  padding-top: 29px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--section-font);
+  text-align: center;
+  z-index: 1;
+}
+.banner-text p {
+  width: 123px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 15px;
+  color: #f8f8f8;
+}
+.banner-text strong {
+  width: 127px;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 29px;
+  color: #f8f8f8;
+  white-space: nowrap;
+}
+.banner-img {
+  position: absolute;
+  top: 0;
+  left: 153px;
+  width: 212px;
+  height: 141px;
+  max-width: none;
+  object-fit: cover;
+}
+/* Yellow decorative rings: 8px #F5CB58 border, cut off by the banner edges. */
+.banner-ring {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border: 8px solid #f5cb58;
+  border-radius: 50%;
+  z-index: 2;
+  pointer-events: none;
+}
+/* Sits on the orange panel; its right edge (103 + 50) just touches the photo at 153. */
+.banner-ring--top { left: 103px; top: -35px; }
+.banner-ring--bottom { left: -13px; top: 106px; }
+
+.dots { display: flex; justify-content: center; gap: 4px; margin-top: 6px; }
+.dot { width: 22px; height: 4px; border: none; border-radius: 4px; padding: 0; background: #f3e9b5; transition: background 0.2s; }
+.dot.active { background: #e95322; }
+
+/* ---------- Popular Items ----------
+   Figma: no card borders, a line between items; image 71.68 x 108 at left 26 (screen padding 20 + 6). */
+.popular-list { margin-left: 6px; }
+.popular-item + .popular-item {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid #ffd8c7;
+}
+/* Figma offsets inside a row (image at top 576, left 26):
+   name   left 111, top +20    price  right 347, top +19
+   meta   left 111, top +47    count  right 347, top +47
+   buttons left 109, top +66, 110 x 26 */
+/* Figma, relative to the row (= image top, 576 in Figma):
+   image 71.68 x 108 at left 26; text column from left 111 to right edge 347.
+   name top 20 (18 tall), price top 19 (23 tall), date / count top 47 (14 tall), buttons top 66 (26 tall). */
+/* Right column ends at the content edge (355), in line with the banner and Best Seller. */
+.popular-row { display: flex; align-items: flex-start; gap: 13.32px; }
+.popular-img {
+  width: 71.68px;
+  height: 108px;
+  border-radius: 20px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.popular-body {
+  flex: 1;
+  min-width: 0;
+  padding-top: 19px;
+  font-family: var(--section-font);
+  color: #391713;
+}
+.popular-line { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.popular-name { margin-top: 1px; font-size: 20px; font-weight: 500; line-height: 18px; color: #391713; }
+.popular-price { font-size: 20px; font-weight: 500; line-height: 23px; color: #e95322; text-align: right; white-space: nowrap; }
+.popular-meta { margin-top: 5px; font-size: 14px; font-weight: 300; line-height: 14px; color: #391713; }
+.popular-count { white-space: nowrap; text-align: right; }
+.popular-line--actions { margin-top: 5px; margin-left: -2px; }
+/* Figma "Cancel Order": 110 x 26, radius 100, 1px border, League Spartan 500 15px / 20px, -0.5% spacing. */
+.pill {
+  box-sizing: border-box;
+  width: 110px;
+  height: 26px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: 100px;
+  font-family: var(--section-font);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+}
+.pill--filled { background: #e95322; border-color: #e95322; color: #fff; }
+.pill--soft { background: #ffdecf; color: #e95322; }
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: var(--orange);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+
+.state-box {
+  margin-top: 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: var(--muted);
+}
+
+/* ---------- Detail ---------- */
+/* Figma (app top = Figma top - 44 status bar): image 323 x 223 at left 23, radius 36;
+   divider at top 273 (Figma 317), 323 wide, 1px #FFD8C7; price text box at top 292 (Figma 336). */
+.app-shell .detail-screen { padding: 38px 29px 0 23px; }
+.detail-hero { position: relative; }
+.detail-img {
+  width: 323px;
+  max-width: 100%;
+  height: 223px;
+  border-radius: 36px;
+  object-fit: cover;
+  display: block;
+}
+.detail-divider { width: 323px; max-width: 100%; margin: 0; border: none; border-top: 1px solid #ffd8c7; }
+.detail-divider--top { margin-top: 12px; }
+.detail-divider--bottom { margin-top: 14px; }
+/* Price: League Spartan 700 24px / 26px, #E95322. Its 14px Figma box is centered in the 26px line. */
+.price-row { height: 26px; margin-top: 12px; }
+.detail-price { font-family: var(--section-font); font-size: 24px; font-weight: 700; line-height: 26px; color: #e95322; }
+/* Stepper: count is 13 x 22 at left 39.46, top 5.64 inside a 33.28px tall group. */
+.qty { display: flex; align-items: center; gap: 15.46px; height: 33.28px; margin: -3.64px 0; }
+.qty-count {
+  width: 13px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  font-family: var(--section-font);
+  font-size: 24.43px;
+  font-weight: 400;
+  line-height: 1;
+  color: #391713;
+}
+.qty button {
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 50%;
+  background: var(--orange);
+  color: #fff;
+  display: grid;
+  place-items: center;
+}
+.qty button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* Figma title: 229 x 14 box at left 24, top 340 (384 - 44); League Spartan 500 20px, #391713.
+   The 20px text is centered in the 14px box. */
+.detail-title {
+  height: 14px;
+  margin: 13px 0 0 1px;
+  font-family: var(--section-font);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 14px;
+  color: #391713;
+}
+/* Figma description: 323 x 37 at left 24, top 362 (406 - 44); League Spartan 300 16px, 95% line height, -3% spacing. */
+.detail-desc {
+  max-width: 323px;
+  margin: 8px -1px 0 1px;
+  font-family: var(--section-font);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 95%;
+  letter-spacing: -0.03em;
+  color: #391713;
+}
+
+/* "Personal portion" uses the title style; Figma: first row label at top 463 (507 - 44), left 23. */
+.detail-portion-title { margin: 36.6px 0 0 1px; }
+.portion-list { display: flex; flex-direction: column; gap: 17.5px; margin-top: 20px; }
+/* Figma label: League Spartan 300 14px / 14px, #391713. */
+.portion-label { font-family: var(--section-font); font-size: 14px; font-weight: 300; line-height: 14px; color: #391713; white-space: nowrap; }
+.portion { position: relative; display: flex; align-items: center; gap: 8px; height: 14px; font-size: 14px; cursor: pointer; }
+.portion .dotted { flex: 1; border-bottom: 1px dashed var(--border); }
+/* Figma price: League Spartan 300 12px, #391713, right edge at 322 (290 + 32); the radio ends at 346. */
+.portion-price {
+  margin-right: -2px;
+  font-family: var(--section-font);
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 14px;
+  color: #391713;
+  white-space: nowrap;
+}
+.portion input { position: absolute; opacity: 0; pointer-events: none; }
+.radio {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--orange);
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+}
+.portion input:checked + .radio::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--orange);
+}
+.portion input:focus-visible + .radio { outline: 2px solid var(--orange); outline-offset: 2px; }
+
+/* Sticks to the bottom of the screen (phone) or the frame (desktop). */
+.detail-footer {
+  position: sticky;
+  bottom: 0;
+  margin: auto -20px 0;
+  padding: 14px 20px 24px;
+  background: linear-gradient(transparent, #fff 30%);
+}
+
+.toast {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: calc(100% + 4px);
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: var(--text);
+  color: #fff;
+  font-size: 13px;
+  text-align: center;
+  animation: toast-in 0.2s ease;
+}
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(8px); }
+}
+
+/* ---------- Misc ---------- */
+.img-placeholder {
+  display: grid;
+  place-items: center;
+  background: var(--orange-soft);
+  color: var(--orange);
+  font-weight: 700;
+  font-size: 22px;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #f0f2f5 25%, #e6e9ee 50%, #f0f2f5 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+  border-radius: 8px;
+}
+@keyframes shimmer {
+  to { background-position: -200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
