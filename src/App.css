@@ -200,11 +200,11 @@ input:focus-visible {
 /* Places the first Popular Items image at Figma top 576 (539 in the app). */
 .home-section--popular { margin: 48px 0 24px; }
 
-/* Figma: 4 images of 71.68 x 108, first at left 29 (screen padding 20 + 9), spread evenly. */
+/* Figma: 4 images of 71.68 x 108, spread evenly across the content width. */
+/* Same 20px side padding as every other section: the row spans the banner's full width. */
 .best-row {
   display: flex;
   justify-content: space-between;
-  margin: 0 9px;
 }
 .best-item { position: relative; display: block; width: 71.68px; flex-shrink: 0; }
 .best-img {
@@ -309,8 +309,8 @@ input:focus-visible {
 .dot.active { background: #e95322; }
 
 /* ---------- Popular Items ----------
-   Figma: no card borders, a line between items; image 71.68 x 108 at left 26 (screen padding 20 + 6). */
-.popular-list { margin-left: 6px; }
+   Figma: no card borders, a line between items; image 71.68 x 108 at the content left edge. */
+.popular-list { margin: 0; }
 .popular-item + .popular-item {
   margin-top: 18px;
   padding-top: 18px;
